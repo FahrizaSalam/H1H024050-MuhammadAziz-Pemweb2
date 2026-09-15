@@ -36,3 +36,6 @@ Route::get('/data-matakuliah', [MatakuliahController::class,
 
 Route::get('/data-matakuliah/{kode}', [MatakuliahController::class,
     'show'])->name('matakuliah.show');
+
+use App\Http\Controllers\MahasiswaWebController;
+Route::get('/mahasiswa-data', [MahasiswaWebController::class, 'index'])->name('mahasiswa.data');
