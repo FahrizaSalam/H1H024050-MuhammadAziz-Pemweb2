@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,7 +56,25 @@ class MahasiswaWebController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::with(['programStudi', 'matakuliahs'])->findOrFail($id);
+
+        return view('mahasiswa.detail', ['mahasiswa' => $mahasiswa]);
+    }
+
+    /**
+     * Display top 10 IPK mahasiswa Teknik Komputer.
+     */
+    public function topIpk()
+    {
+        $prodiTK = ProgramStudi::where('kode', 'TK')->first();
+
+        $topMahasiswa = Mahasiswa::with('programStudi')
+            ->where('program_studi_id', $prodiTK->id)
+            ->orderBy('ipk', 'desc')
+            ->take(10)
+            ->get();
+
+        return view('mahasiswa.top-ipk', ['topMahasiswa' => $topMahasiswa]);
     }
 
     /**

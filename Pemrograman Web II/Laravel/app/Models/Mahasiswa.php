@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mahasiswa extends Model
@@ -34,5 +35,12 @@ class Mahasiswa extends Model
     public function programStudi(): BelongsTo
     {
         return $this->belongsTo(ProgramStudi::class);
+    }
+
+    public function matakuliahs(): BelongsToMany
+    {
+        return $this->belongsToMany(Matakuliah::class, 'mahasiswa_matakuliah')
+            ->withPivot('nilai')
+            ->withTimestamps();
     }
 }

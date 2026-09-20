@@ -9,6 +9,10 @@
     <div class="alert alert-success">{{ session('sukses') }}</div>
 @endif
 
+<div class="mb-3">
+    <a href="{{ route('mahasiswa.top-ipk') }}" class="btn btn-primary btn-sm">Top 10 IPK Teknik Komputer</a>
+</div>
+
 <table class="table table-striped bg-white">
     <thead>
         <tr>
@@ -17,6 +21,7 @@
             <th>Program Studi</th>
             <th>Angkatan</th>
             <th>IPK</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +32,9 @@
                 <td>{{ $mahasiswa->programStudi->nama }}</td>
                 <td>{{ $mahasiswa->angkatan }}</td>
                 <td>{{ $mahasiswa->ipk }}</td>
+                <td>
+                    <a href="{{ route('mahasiswa.detail', $mahasiswa->id) }}" class="btn btn-info btn-sm">Detail</a>
+                </td>
             </tr>
         @endforeach
     </tbody>

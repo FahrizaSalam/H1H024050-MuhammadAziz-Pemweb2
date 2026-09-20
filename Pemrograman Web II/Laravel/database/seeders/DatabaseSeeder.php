@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ProgramStudiSeeder::class);
         Mahasiswa::factory()->count(30)->create();
+        $this->call(MatakuliahSeeder::class);
+        $this->call(MahasiswaMatakuliahSeeder::class);
     }
 }
