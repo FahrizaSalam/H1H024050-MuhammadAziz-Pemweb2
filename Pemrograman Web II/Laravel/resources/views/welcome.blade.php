@@ -55,6 +55,19 @@
                     </div>
                 </div>
             </div>
+            <!-- Modul 4: RESTful API -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <span class="badge bg-primary rounded-pill px-3 py-2">Modul 4</span>
+                        </div>
+                        <h5 class="card-title fw-bold">RESTful API</h5>
+                        <p class="card-text text-muted mb-4">Mengakses data melalui API (Akan menampilkan respons JSON).</p>
+                        <a href="{{ url('/api/status') }}" class="btn btn-primary px-4 py-2 rounded-pill">Cek Status API</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

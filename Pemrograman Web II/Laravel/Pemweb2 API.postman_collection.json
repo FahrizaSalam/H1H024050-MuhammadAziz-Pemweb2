@@ -1,0 +1,134 @@
+{
+  "info": {
+    "_postman_id": "0ed25e8e-2c82-4be0-97d1-7ba76ac8e498",
+    "name": "Pemweb2 API",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58025845",
+    "_collection_link": "https://go.postman.co/collection/58025845-0ed25e8e-2c82-4be0-97d1-7ba76ac8e498?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Lihat Semua Mahasiswa",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/mahasiswa",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "mahasiswa"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Tambah Mahasiswa",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"program_studi_id\": 1,\r\n    \"nim\": \"H1A125999\",\r\n    \"nama\": \"Dewi Anggraini\",\r\n    \"email\": \"dewi.anggraini@example.com\",\r\n    \"angkatan\": 2025,\r\n    \"ipk\": 3.65\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/mahasiswa",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "mahasiswa"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ubah Data Mahasiswa",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"ipk\": 3.90\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/mahasiswa/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "mahasiswa",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Hapus Data Mahasiswa",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/mahasiswa/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "mahasiswa",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    }
+  ]
+}
