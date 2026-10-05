@@ -43,3 +43,10 @@ Route::get('/mahasiswa-data', [MahasiswaWebController::class, 'index'])->name('m
 Route::get('/mahasiswa-data/{id}', [MahasiswaWebController::class, 'show'])->name('mahasiswa.detail');
 
 Route::get('/mahasiswa-top-ipk', [MahasiswaWebController::class, 'topIpk'])->name('mahasiswa.top-ipk');
+
+Route::get('/login', function () {
+    return response()->json([
+        'sukses' => false,
+        'pesan' => 'Token tidak valid atau belum dikirim'
+    ], 401);
+})->name('login');
