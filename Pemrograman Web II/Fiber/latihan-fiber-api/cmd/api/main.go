@@ -26,6 +26,7 @@ func main() {
 	app.Use(logger.New())
 	app.Use(recoverer.New())
 	app.Use(middleware.WaktuProses())
+	app.Use(middleware.KunciApi(konf.KunciApi))
 
 	router.Daftarkan(app)
 

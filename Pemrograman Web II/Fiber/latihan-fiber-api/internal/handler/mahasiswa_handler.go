@@ -3,7 +3,6 @@ package handler
 import (
 	"sort"
 	"strconv"
-	"strings"
 
 	"github.com/gofiber/fiber/v3"
 	"latihan-fiber-api/internal/model"
@@ -11,9 +10,10 @@ import (
 
 func DaftarMahasiswa(c fiber.Ctx) error {
 	angkatan := c.Query("angkatan", "")
-	urut := strings.ToLower(c.Query("urut", ""))
+	urut := c.Query("urut", "")
 
-	hasil := make([]model.Mahasiswa, 0)
+	hasil := []model.Mahasiswa{}
+
 	if angkatan == "" {
 		hasil = append(hasil, model.Daftar...)
 	} else {
@@ -21,6 +21,7 @@ func DaftarMahasiswa(c fiber.Ctx) error {
 		if err != nil {
 			return fiber.NewError(fiber.StatusBadRequest, "Parameter angkatan harus berupa angka")
 		}
+
 		for i := 0; i < len(model.Daftar); i++ {
 			if model.Daftar[i].Angkatan == nilaiAngkatan {
 				hasil = append(hasil, model.Daftar[i])
@@ -28,11 +29,12 @@ func DaftarMahasiswa(c fiber.Ctx) error {
 		}
 	}
 
-	if urut == "nama" {
+	switch urut {
+	case "nama":
 		sort.Slice(hasil, func(i, j int) bool {
 			return hasil[i].Nama < hasil[j].Nama
 		})
-	} else if urut == "ipk" {
+	case "ipk":
 		sort.Slice(hasil, func(i, j int) bool {
 			return hasil[i].Ipk > hasil[j].Ipk
 		})
@@ -62,10 +64,11 @@ func DetailMahasiswa(c fiber.Ctx) error {
 	return fiber.NewError(fiber.StatusNotFound, "Mahasiswa tidak ditemukan")
 }
 
-func DetailMahasiswaByNim(c fiber.Ctx) error {
+func CariMahasiswaNim(c fiber.Ctx) error {
 	nim := c.Params("nim")
+
 	for i := 0; i < len(model.Daftar); i++ {
-		if strings.EqualFold(model.Daftar[i].Nim, nim) {
+		if model.Daftar[i].Nim == nim {
 			return c.JSON(fiber.Map{
 				"sukses": true,
 				"data":   model.Daftar[i],
@@ -73,5 +76,5 @@ func DetailMahasiswaByNim(c fiber.Ctx) error {
 		}
 	}
 
-	return fiber.NewError(fiber.StatusNotFound, "Mahasiswa tidak ditemukan")
+	return fiber.NewError(fiber.StatusNotFound, "Mahasiswa dengan NIM tersebut tidak ditemukan")
 }

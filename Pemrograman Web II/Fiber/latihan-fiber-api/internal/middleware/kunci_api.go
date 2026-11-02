@@ -1,21 +1,25 @@
 package middleware
 
 import (
-	"os"
-
 	"github.com/gofiber/fiber/v3"
 )
 
-func KunciApi() fiber.Handler {
+func KunciApi(kunciYangBenar string) fiber.Handler {
 	return func(c fiber.Ctx) error {
-		kunciValid := os.Getenv("API_KEY")
-		if kunciValid == "" {
-			kunciValid = "kuncirahasia2026"
+		kunciDiterima := c.Get("X-Api-Key")
+
+		if kunciDiterima == "" {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"sukses": false,
+				"pesan":  "Header X-Api-Key diperlukan",
+			})
 		}
 
-		kunciReq := c.Get("X-Api-Key")
-		if kunciReq == "" || kunciReq != kunciValid {
-			return fiber.NewError(fiber.StatusUnauthorized, "Akses ditolak: Kunci API tidak valid atau tidak disertakan")
+		if kunciDiterima != kunciYangBenar {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"sukses": false,
+				"pesan":  "Kunci API tidak valid",
+			})
 		}
 
 		return c.Next()
