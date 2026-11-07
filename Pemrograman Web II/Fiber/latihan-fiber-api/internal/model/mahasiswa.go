@@ -1,6 +1,10 @@
 package model
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type ProgramStudi struct {
 	ID        uint      `gorm:"primaryKey" json:"id"`
@@ -20,7 +24,8 @@ type Mahasiswa struct {
 	Email          string        `gorm:"size:100;uniqueIndex" json:"email"`
 	Angkatan       int           `json:"angkatan"`
 	Ipk            float64       `gorm:"type:decimal(4,2)" json:"ipk"`
-	Aktif          bool          `gorm:"default:true" json:"aktif"`
-	CreatedAt      time.Time     `json:"dibuat_pada"`
-	UpdatedAt      time.Time     `json:"diubah_pada"`
+	Aktif          bool           `gorm:"default:true" json:"aktif"`
+	CreatedAt      time.Time      `json:"dibuat_pada"`
+	UpdatedAt      time.Time      `json:"diubah_pada"`
+	DeletedAt      gorm.DeletedAt `gorm:"index" json:"dihapus_pada,omitempty"`
 }

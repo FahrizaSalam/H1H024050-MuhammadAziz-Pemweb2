@@ -67,3 +67,28 @@ func Hapus(mahasiswa *model.Mahasiswa) error {
 	return config.DB.Delete(mahasiswa).Error
 }
 
+func AmbilTerhapus() ([]model.Mahasiswa, error) {
+	var daftar []model.Mahasiswa
+
+	err := config.DB.Unscoped().
+		Where("deleted_at IS NOT NULL").
+		Preload("ProgramStudi").
+		Find(&daftar).Error
+
+	return daftar, err
+}
+
+func AmbilTerhapusPerId(id uint) (model.Mahasiswa, error) {
+	var mahasiswa model.Mahasiswa
+
+	err := config.DB.Unscoped().
+		Where("id = ? AND deleted_at IS NOT NULL", id).
+		Preload("ProgramStudi").
+		First(&mahasiswa).Error
+
+	return mahasiswa, err
+}
+
+func PulihkanMahasiswa(mahasiswa *model.Mahasiswa) error {
+	return config.DB.Unscoped().Model(mahasiswa).Update("deleted_at", nil).Error
+}
