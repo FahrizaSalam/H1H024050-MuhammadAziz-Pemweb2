@@ -17,6 +17,10 @@ import (
 func main() {
 	konf := config.Muat()
 
+	config.HubungkanBasisData(konf)
+	config.Migrasi()
+	config.DataAwal()
+
 	app := fiber.New(fiber.Config{
 		AppName:      konf.NamaAplikasi,
 		ErrorHandler: penanganGalat,
@@ -30,7 +34,7 @@ func main() {
 
 	router.Daftarkan(app)
 
-	// Langkah 10: Rute wildcard dan 404
+	// Rute wildcard dan 404
 	app.Use(func(c fiber.Ctx) error {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"sukses": false,
